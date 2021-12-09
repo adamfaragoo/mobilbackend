@@ -39,7 +39,7 @@ app.post('/kereses', (req, res) => {
 })
 
 connection.connect()
-connection.query("SELECT * FROM filmek WHERE filmek.film_ev = '" + req.body.bevitel1 + "',", function (err, rows, fields) { 
+connection.query('SELECT * FROM filmek WHERE filmek.film_ev = "'+req.body.bevitel1+'"', function (err, rows, fields) { 
 if (err) throw err
 
   console.log(rows)
