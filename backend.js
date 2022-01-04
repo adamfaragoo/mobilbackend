@@ -103,6 +103,28 @@ connection.query('SELECT * from filmek WHERE film_mufaj ='+ req.body.bevitel2, f
 connection.end()
 })
 
+app.post('/filmkep', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'vizsgamunka'
+})
+
+connection.connect()
+
+connection.query('SELECT filmek.film_kep from filmek WHERE filmek.film_id ='+ req.body.bevitel3, function (err, rows, fields) {
+  if (err) throw err
+
+  console.log(rows)
+  
+  res.send(rows)
+})
+
+connection.end()
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
