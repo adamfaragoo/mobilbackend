@@ -65,7 +65,7 @@ app.post('/kereses', (req, res) => {
 })
 
 connection.connect()
-let sz='SELECT * from filmek  WHERE filmek.film_cim like "%'+req.body.bevitel1+'%"';
+let sz='SELECT * from filmek INNER JOIN film_mufajok ON filmek.film_mufaj = film_mufajok.mufaj_id WHERE filmek.film_cim like "%'+req.body.bevitel1+'%"';
   connection.query(sz, function (err, rows, fields) {
 if (err) throw err
 
