@@ -332,3 +332,24 @@ connection.query('SELECT sorozat.sorozat_kep from sorozat WHERE sorozat.sorozat_
 connection.end()
 })
 
+app.post('/evszures', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'vizsgamunka'
+})
+
+connection.connect()
+let sz='SELECT * from filmek WHERE filmek.film_ev = "'+req.body.bevitel1+'"';
+  connection.query(sz, function (err, rows, fields) {
+if (err) throw err
+
+  console.log(rows)
+  res.send(rows)
+})
+
+connection.end()
+})
+
