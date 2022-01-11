@@ -410,7 +410,7 @@ app.post('/atlagertek', (req, res) => {
 
 connection.connect()
 
-connection.query('SELECT AVG(ertekeles.ertekeles_ertek) AS atlag FROM ertekeles WHERE ertekeles.ertekeles_sorozat_id ='+req.body.bevitel3, function (err, rows, fields) {
+connection.query('SELECT ROUND(AVG(ertekeles.ertekeles_ertek),2) AS atlag FROM ertekeles WHERE ertekeles.ertekeles_sorozat_id ='+req.body.bevitel3, function (err, rows, fields) {
   if (err) throw err
 
   console.log(rows)
@@ -432,7 +432,7 @@ app.post('/filmatlagertek', (req, res) => {
 
 connection.connect()
 
-connection.query('SELECT AVG(film_ertekeles.film_ertekeles_ertek) AS atlag FROM film_ertekeles WHERE film_ertekeles.film_ertekeles_film_id ='+req.body.bevitel3, function (err, rows, fields) {
+connection.query('SELECT ROUND(AVG(film_ertekeles.film_ertekeles_ertek),2) AS atlag FROM film_ertekeles WHERE film_ertekeles.film_ertekeles_film_id ='+req.body.bevitel3, function (err, rows, fields) {
   if (err) throw err
 
   console.log(rows)
