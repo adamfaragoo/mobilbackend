@@ -342,8 +342,8 @@ app.post('/evszures', (req, res) => {
 })
 
 connection.connect()
-let sz='SELECT * from filmek WHERE filmek.film_ev = "'+req.body.bevitel1+'"';
-  connection.query(sz, function (err, rows, fields) {
+
+connection.query('SELECT * from filmek WHERE filmek.film_ev = "'+req.body.bevitel1+'"', function (err, rows, fields) {
 if (err) throw err
 
   console.log(rows)
@@ -353,3 +353,114 @@ if (err) throw err
 connection.end()
 })
 
+app.post('/ertekeles', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'vizsgamunka'
+})
+
+connection.connect()
+
+
+connection.query( "INSERT INTO ertekeles VALUES (NULL, '"+req.body.bevitel1+"','"+req.body.bevitel2+"')",function (err, rows, fields) {
+  if (err) throw err
+
+  res.send("siker")
+  console.log("Siker")
+})
+
+connection.end()
+
+})
+
+app.post('/filmertekeles', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'vizsgamunka'
+})
+
+connection.connect()
+
+
+connection.query( "INSERT INTO film_ertekeles VALUES (NULL, '"+req.body.bevitel1+"','"+req.body.bevitel2+"')",function (err, rows, fields) {
+  if (err) throw err
+
+  res.send("siker")
+  console.log("Siker")
+})
+
+connection.end()
+
+})
+
+app.post('/atlagertek', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'vizsgamunka'
+})
+
+connection.connect()
+
+connection.query('SELECT AVG(ertekeles.ertekeles_ertek) AS atlag FROM ertekeles WHERE ertekeles.ertekeles_sorozat_id ='+req.body.bevitel3, function (err, rows, fields) {
+  if (err) throw err
+
+  console.log(rows)
+  
+  res.send(rows)
+})
+
+connection.end()
+})
+
+app.post('/filmatlagertek', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'vizsgamunka'
+})
+
+connection.connect()
+
+connection.query('SELECT AVG(film_ertekeles.film_ertekeles_ertek) AS atlag FROM film_ertekeles WHERE film_ertekeles.film_ertekeles_film_id ='+req.body.bevitel3, function (err, rows, fields) {
+  if (err) throw err
+
+  console.log(rows)
+  
+  res.send(rows)
+})
+
+connection.end()
+})
+
+app.get('/legjobbfilmek', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'vizsgamunka'
+})
+
+connection.connect()
+let sz = 'SELECT  filmek.film_cim, filmek.film_kep ,AVG(film_ertekeles.film_ertekeles_ertek) AS atlag FROM film_ertekeles INNER JOIN filmek ON filmek.film_id=film_ertekeles.film_ertekeles_film_id WHERE film_ertekeles.film_ertekeles_film_id GROUP BY filmek.film_cim ORDER BY (atlag)  DESC LIMIT 5 ';
+connection.query(sz, function (err, rows, fields) {
+  if (err) throw err
+
+  console.log(rows)
+  
+  res.send(rows)
+})
+
+connection.end()
+})
