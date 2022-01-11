@@ -464,3 +464,25 @@ connection.query(sz, function (err, rows, fields) {
 
 connection.end()
 })
+
+app.get('/legjobbsorozatok', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'vizsgamunka'
+})
+
+connection.connect()
+let sz = 'SELECT * ,AVG(ertekeles.ertekeles_ertek) AS atlag FROM ertekeles INNER JOIN sorozat ON sorozat.sorozat_id=ertekeles.ertekeles_sorozat_id WHERE ertekeles.ertekeles_sorozat_id GROUP BY sorozat.sorozat_cim ORDER BY (atlag)  DESC LIMIT 5';
+connection.query(sz, function (err, rows, fields) {
+  if (err) throw err
+
+  console.log(rows)
+  
+  res.send(rows)
+})
+
+connection.end()
+})
