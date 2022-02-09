@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Jan 18. 10:44
+-- Létrehozás ideje: 2022. Feb 09. 10:52
 -- Kiszolgáló verziója: 10.4.17-MariaDB
 -- PHP verzió: 8.0.0
 
@@ -133,7 +133,9 @@ INSERT INTO `ertekeles` (`ertekeles_id`, `ertekeles_ertek`, `ertekeles_sorozat_i
 (126, 6, 8),
 (127, 7, 8),
 (128, 9, 8),
-(129, 10, 10);
+(129, 10, 10),
+(130, 5, 1),
+(131, 9, 15);
 
 -- --------------------------------------------------------
 
@@ -190,7 +192,8 @@ INSERT INTO `filmek` (`film_id`, `film_cim`, `film_ev`, `film_hossz`, `film_mufa
 (32, 'Fűrész', '2004', '103', 6, 'furesz1.jpg', 'Mit tennél meg azért, hogy mentsd az életed? Készülj egy idegborzoló utazásra a terror legsötétebb bugyraiba. A megháborodott szadista sorozatgyilkos áldozatait megszállottan az élet értékére akarja megtanítani úgy, hogy erkölcsileg szilárd embereket rabol el, és hátborzongató játékra kényszeríti őket, melynek tétje a saját életük. Az áldozatok mindegyikének képtelen döntési helyzetekkel szembesülve kell megküzdenie azért, hogy visszanyerje életét, vagy ellenkező esetben belehaljon a próbálkozásokba.'),
 (33, 'Annabelle', '2014', '99', 6, 'annabelle.jpg', 'John (Ward Horton) különleges ajándékot talál feleségének, Miának (Annabelle Wallis). Egy hófehér menyasszonyi ruhába öltöztetett, ritka, régi porcelánbabát. Ám Mia nem örülhet sokáig az ajándéknak, mert a babának szörnyű titka van. S egy borzalmas éjszakán a titokra fény derül. Egy sátánista, baljós szeánszon kiszabadul a babába zárt gonoszt, Annabelle.'),
 (34, 'Démonok között', '2013', '112', 6, 'demonokkozott1.jpg', 'Azt hihetnénk, hogy ilyesmi csak egy forgatókönyv-írónak juthat eszébe, pedig ez a történet megtörtént eseten alapul. A paranormális esetek két világhírű kutatója, Ed és Lorraine Warren jegyezte fel annak a családnak a történetét, melyet a világtól távol, egy tanyaházban nem evilági lények terrorizáltak.\r\nPerronék öt gyerekükkel költöznek be új, magányosan álló vidéki házukba, és nem tudják, hogy valaki már él a falak között. Valaki, aki minden percben jelen van, gonosz, és képtelenség megszabadulni tőle. A megmagyarázhatatlan földöntúli jelenlét pokollá teszi a napjaikat, és egyre veszélyesebb, ijesztőbb módokat talál, hogy jelezze: övé a ház, és nem engedi át másnak. Kénytelenek paranormális ügyek nyomozóihoz fordulni: azokhoz, akik az amityville-i esetet is lejegyezték. A szakemberek nekilátnak, hogy kifüstöljék a gonoszt a házból de úgy tűnik, még ők sem bírnak vele.'),
-(35, 'Hang nélkül 2', '2020', '97', 6, 'hangnelkul2.jpg', 'Az otthonukban történt halálos eseményeket követően az Abbott családnak a külvilág borzalmaival kell szembesülnie, miközben tovább küzdenek a túlélésért – a legnagyobb csendben. Miután arra kényszerülnek, hogy nekivágjanak az ismeretlennek, gyorsan ráeszmélnek, hogy nem csak a hangra vadászó szörnyek jelentenek fenyegetést a homokösvényen túl...');
+(35, 'Hang nélkül 2', '2020', '97', 6, 'hangnelkul2.jpg', 'Az otthonukban történt halálos eseményeket követően az Abbott családnak a külvilág borzalmaival kell szembesülnie, miközben tovább küzdenek a túlélésért – a legnagyobb csendben. Miután arra kényszerülnek, hogy nekivágjanak az ismeretlennek, gyorsan ráeszmélnek, hogy nem csak a hangra vadászó szörnyek jelentenek fenyegetést a homokösvényen túl...'),
+(2432, '534', '3', '5', 2, 'letoltes.jpg', 'asdasd');
 
 -- --------------------------------------------------------
 
@@ -262,7 +265,15 @@ INSERT INTO `film_ertekeles` (`film_ertekeles_id`, `film_ertekeles_ertek`, `film
 (51, 1, 7),
 (52, 1, 7),
 (53, 1, 7),
-(54, 8, 11);
+(54, 8, 11),
+(55, 8, 3),
+(56, 9, 3),
+(57, 8, 3),
+(58, 7, 3),
+(59, 10, 3),
+(60, 10, 3),
+(61, 10, 3),
+(62, 10, 3);
 
 -- --------------------------------------------------------
 
@@ -327,7 +338,8 @@ CREATE TABLE `komment` (
 --
 
 INSERT INTO `komment` (`komment_id`, `komment_nev`, `komment_szoveg`, `komment_sorozat_id`) VALUES
-(37, 'Gag', 'Haha', 4);
+(39, 'Asd', 'Tetves szar', 29),
+(40, 'a', 'sads', 10);
 
 -- --------------------------------------------------------
 
@@ -426,7 +438,10 @@ INSERT INTO `sorozat` (`sorozat_id`, `sorozat_cim`, `sorozat_ev`, `sorozat_hossz
 (27, 'Parkműsor', '2010-2017', '21', 4, 'regularshow.jpg', 'A sorozat két munkásosztálybeli barát, egy Mordecai nevű kék szajkó és egy Rigby nevű mosómedve élete körül forog - mindketten egy helyi park gondozójaként dolgoznak. Általában egy egyszerű problémát próbálnak megoldani, ami szürreális, extrém és gyakran természetfeletti kalandokhoz vezet.', 8, 261),
 (28, 'True Detective', '2014-2019', '54-87', 5, 'truedetective.jpg', 'Egy különös dél-kaliforniai gyilkosság, amelyet a kaliforniai autópálya-rendőr, Paul Woodrugh (Taylor Kitsch) fedez fel, összeesküvéshez vezet, amely a maffiózó Frank Semyon (Vince Vaughn), a maffiával kapcsolatban álló Ray Velcoro (Colin Farrell) nyomozó és Ani Bezzerides (Rachel McAdams) Ventura megyei seriff nyomozót is behálózza', 3, 24),
 (29, 'Lucifer', '2016-2021', '42-62', 2, 'lucifer.jpg', 'Lucifer Morningstar ténylegesen maga az ördög, a pokol ura, de már öt éve a halandók között, a földön él. A lázadó természetű Lucifer atyja, az őt a mennyből a pokolba száműző Isten akaratával dacolva hagyta el a poklot. A földre magával hozta a pokol egyik démonát és kínzómesterét, az emberi alakjában nő Mazikeent, becenevén Maze-t. Miután Lucifer maga is angyal, érkezésüket követően kérésére Maze levágja az angyalszárnyait. Ironikus módon az „Angyalok városában”, azaz Los Angeles-ben telepszenek le, ahol Lucifer beindítja a jól menő, exkluzív Lux bárt.', 6, 93),
-(30, 'Hawkeye', '2021-', '43-51', 6, 'hawkeye.jpg', '2012-ben, a New York-i csata során a fiatal Kate Bishop szemtanúja lesz Clint Barton harcának a Chitauri ellen, és arra törekszik, hogy olyan hős legyen, mint ő, miután a férfi véletlenül megmenti az életét, bár Bishop apja a támadás során meghal. A jelenben Barton a karácsonyi ünnepeket a gyermekeivel tölti New Yorkban.', 1, 6);
+(30, 'Hawkeye', '2021-', '43-51', 6, 'hawkeye.jpg', '2012-ben, a New York-i csata során a fiatal Kate Bishop szemtanúja lesz Clint Barton harcának a Chitauri ellen, és arra törekszik, hogy olyan hős legyen, mint ő, miután a férfi véletlenül megmenti az életét, bár Bishop apja a támadás során meghal. A jelenben Barton a karácsonyi ünnepeket a gyermekeivel tölti New Yorkban.', 1, 6),
+(45, 'asd', 'a', 'a', 2, 'letoltes.jpg', 'a', 4, 5),
+(46, 'asd', 'a', 'a', 2, 'letoltes.jpg', 'a', 4, 5),
+(47, 'ada', '32', '32', 5, 'letoltes.jpg', 'asfafa', 5, 6);
 
 -- --------------------------------------------------------
 
@@ -450,7 +465,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `createdAt`, `updatedAt`) VALUES
 (1, 'user', 'user', '$2a$08$gXM4pyuhZFlC72PeAwxrUOR0uA31/d2PdgnHP35JGV.0bQNiZBatS', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (2, 'mod', 'mod', '$2a$08$gXM4pyuhZFlC72PeAwxrUOR0uA31/d2PdgnHP35JGV.0bQNiZBatS', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'admin', 'admin', '$2a$08$97Ze1/hXfOX44WdC62Rq8uRkog9HYC1HukRX8eld2ZEKPyenM5v.G', '2020-08-02 15:03:59', '2020-08-02 15:03:59');
+(3, 'admin', 'admin', '$2a$08$97Ze1/hXfOX44WdC62Rq8uRkog9HYC1HukRX8eld2ZEKPyenM5v.G', '2020-08-02 15:03:59', '2020-08-02 15:03:59'),
+(14, 'adamfarago', 'adam.farago004@gmail.com', '$2a$08$j2N/2rMBYDeurfIi2KguXeOIAdOqDrzZVQ6RdvLpyrEpVkYm6I0rK', '2022-01-24 10:53:06', '2022-01-24 10:53:06');
 
 -- --------------------------------------------------------
 
@@ -472,9 +488,13 @@ CREATE TABLE `user_roles` (
 INSERT INTO `user_roles` (`createdAt`, `updatedAt`, `roleId`, `userId`) VALUES
 ('0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
 ('2020-08-02 15:04:00', '2020-08-02 15:04:00', 1, 3),
+('2022-01-24 10:53:06', '2022-01-24 10:53:06', 1, 14),
+('2022-01-24 10:53:06', '2022-01-24 10:53:06', 1, 15),
+('2022-02-03 12:45:14', '2022-02-03 12:45:14', 1, 16),
 ('0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 2),
 ('0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 3),
-('2020-08-02 15:04:00', '2020-08-02 15:04:00', 3, 3);
+('2020-08-02 15:04:00', '2020-08-02 15:04:00', 3, 3),
+('2022-01-24 13:18:02', '0000-00-00 00:00:00', 3, 14);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -573,19 +593,19 @@ ALTER TABLE `ajanlas`
 -- AUTO_INCREMENT a táblához `ertekeles`
 --
 ALTER TABLE `ertekeles`
-  MODIFY `ertekeles_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `ertekeles_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- AUTO_INCREMENT a táblához `filmek`
 --
 ALTER TABLE `filmek`
-  MODIFY `film_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2429;
+  MODIFY `film_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2433;
 
 --
 -- AUTO_INCREMENT a táblához `film_ertekeles`
 --
 ALTER TABLE `film_ertekeles`
-  MODIFY `film_ertekeles_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `film_ertekeles_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT a táblához `film_komment`
@@ -603,7 +623,7 @@ ALTER TABLE `film_mufajok`
 -- AUTO_INCREMENT a táblához `komment`
 --
 ALTER TABLE `komment`
-  MODIFY `komment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `komment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT a táblához `mufaj`
@@ -615,13 +635,13 @@ ALTER TABLE `mufaj`
 -- AUTO_INCREMENT a táblához `sorozat`
 --
 ALTER TABLE `sorozat`
-  MODIFY `sorozat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `sorozat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Megkötések a kiírt táblákhoz
