@@ -507,3 +507,47 @@ connection.query(sz, function (err, rows, fields) {
 
 connection.end()
 })
+
+app.get('/legfrissebbfilmek', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'vizsgamunka'
+})
+
+connection.connect()
+let sz = 'SELECT  * FROM filmek ORDER BY filmek.film_ev DESC LIMIT 5 ';
+connection.query(sz, function (err, rows, fields) {
+  if (err) throw err
+
+  console.log(rows)
+  
+  res.send(rows)
+})
+
+connection.end()
+})
+
+app.get('/legfrissebbsorozatok', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'vizsgamunka'
+})
+
+connection.connect()
+let sz = 'SELECT  * FROM sorozat ORDER BY sorozat.sorozat_ev DESC LIMIT 5 ';
+connection.query(sz, function (err, rows, fields) {
+  if (err) throw err
+
+  console.log(rows)
+  
+  res.send(rows)
+})
+
+connection.end()
+})
